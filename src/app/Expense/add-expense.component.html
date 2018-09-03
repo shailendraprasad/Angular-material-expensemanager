@@ -1,0 +1,33 @@
+<form #addExpenseForm="ngForm" (ngSubmit)="SubmitExpense(addExpenseForm)" novalidate autocomplete="off">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>Add Expense</mat-card-title>
+      <mat-card-subtitle>Add your expenses individually for better tracking</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field style="width: 100%;">
+        <input matInput name="amount" [(ngModel)]="expense.amount" placeholder="Enter amount" required #amount="ngModel">
+        <mat-error *ngIf=amount.invalid>Please enter an amount</mat-error>
+      </mat-form-field>
+      <br>
+      <br>
+      <mat-form-field style="width: 100%;">
+        <mat-select placeholder="Select Category" #category="ngModel" required name="category" [(ngModel)]="expense.category">
+          <mat-option value="{{category}}" *ngFor="let category of categories">{{ category }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf=category.invalid>Please select a category</mat-error>
+      </mat-form-field>
+      <br><br>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" name="date" #date="ngModel" placeholder="When did you spend?" [(ngModel)]="expense.date" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker ></mat-datepicker>
+        <mat-error *ngIf=date.invalid>Please select a date</mat-error>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Add Expense</button>
+      <button mat-raised-button color="warn" (click)="Cancel(addExpenseForm)" type="reset">Cancel</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

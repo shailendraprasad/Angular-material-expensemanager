@@ -1,0 +1,32 @@
+.container h1 {
+    margin: auto;
+    text-align: center;
+    color: gray
+}
+
+/* Left column */
+.leftcolumn {   
+    float: left;
+    width: 55%;
+}
+
+/* Right column */
+.rightcolumn {
+    float: right;
+    width: 35%;
+    padding-right: 8%;
+    text-align: center;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    clear: both;
+}
+
+@media screen and (max-width: 800px) {
+    .leftcolumn, .rightcolumn {   
+        width: 100%;
+        padding: 0;
+    }
+}

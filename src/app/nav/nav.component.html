@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" class="mat-elevation-z5">
+  <mat-icon>money</mat-icon>&nbsp;
+  <span [routerLink]="['']" style="display: inline-flex;vertical-align: middle;">
+    Expense Manager</span>
+  <span class="spacer"></span>
+  <button mat-button [routerLink]="['addexpense']" *ngIf="isAuthenticated">
+    <mat-icon>add</mat-icon> Add Expense</button>
+  <button mat-button [routerLink]="['viewexpense']" *ngIf="isAuthenticated">
+    <mat-icon>list_alt</mat-icon> View Expenses</button>
+  <button mat-button [routerLink]="['/user/register']" *ngIf="!isAuthenticated">
+    <mat-icon>label_important</mat-icon> Register</button>
+  <button mat-button [routerLink]="['/user/login']" *ngIf="!isAuthenticated">
+    <mat-icon>input</mat-icon> Login</button>
+  <button mat-button (click)="logOut()" *ngIf="isAuthenticated">
+    <mat-icon>exit_to_app</mat-icon> Logout </button>
+</mat-toolbar>
