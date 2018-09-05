@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { UserService } from '../user.service';
 import { User } from '../UserModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,7 @@ import { User } from '../UserModel';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   registrationForm: FormGroup;
 
@@ -44,7 +45,8 @@ export class RegisterComponent implements OnInit {
 
 
     this.userService.registerUser(user).subscribe(res => {
-      console.log(res)
+      this.userService.isAuthenticated.next(true);
+      this.router.navigate(['/']);
     });
 
   }

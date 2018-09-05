@@ -17,14 +17,12 @@ export class ExpenseService {
 
   AddExpense(expense): Observable<boolean> {
     return this.http.post(baseExpenseApiUrl + 'expense/create', expense, { observe: 'response' }).pipe(map((result: Response) => {
-      console.log(result.body)
       return result.body;
     }));
   }
 
   getAllExpenses(): Observable<any> {
     return this.http.get(baseExpenseApiUrl + 'expense/get', { observe: 'response' }).pipe(map((result: Response) => {
-      console.log(result.body)
       return result.body;
     }));
   }

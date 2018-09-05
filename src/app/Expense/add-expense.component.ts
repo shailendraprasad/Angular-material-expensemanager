@@ -42,12 +42,12 @@ export class AddExpenseComponent implements OnInit {
       expenseToAdd.date = form.value.date;
 
       this.expenseService.AddExpense(expenseToAdd).subscribe(res => {
-        console.log(res)
+        form.resetForm();
+
+        this.snackBar.open('Expense Added', 'Dismiss', { duration: 2000 });
       });
 
-      form.resetForm();
 
-      this.snackBar.open('Expense Added', 'Dismiss', { duration: 2000 });
     }
   }
 

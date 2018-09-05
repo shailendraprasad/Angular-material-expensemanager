@@ -31,7 +31,6 @@ export class ExpenseAPIInterceptor implements HttpInterceptor {
     return next.handle(authReq).pipe(
       tap(event => {
         if (event instanceof HttpResponse) {
-          console.log('here')
         }
       }, error => {
         console.log(error.status)

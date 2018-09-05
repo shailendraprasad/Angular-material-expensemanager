@@ -25,7 +25,7 @@ export class ViewExpenseComponent implements OnInit {
     this.subscriptionForExpenseData = this.expenseService.getAllExpenses().
       subscribe(data => {
         this.isLoading = false;
-        this.dataSource.data = data.value;
+        this.dataSource.data = data.userExpenses;
       });
     this.dataSource.paginator = this.paginator;
   }
