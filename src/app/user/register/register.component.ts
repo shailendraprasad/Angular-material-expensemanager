@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
+import { UserService } from '../user.service';
+import { User } from '../UserModel';
 
 @Component({
   selector: 'app-register',
@@ -8,7 +10,7 @@ import { FormGroup, FormControl, Validators, FormArray, AbstractControl } from '
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   registrationForm: FormGroup;
 
@@ -20,8 +22,8 @@ export class RegisterComponent implements OnInit {
         new FormGroup({
           firstName: new FormControl('', [Validators.required]),
           lastName: new FormControl('', [Validators.required]),
-          email: new FormControl('', [Validators.required]),
-          password: new FormControl('', [Validators.required]),
+          email: new FormControl('', [Validators.required, Validators.email]),
+          password: new FormControl('', [Validators.required, Validators.minLength(8)]),
           confirmpassword: new FormControl('', [Validators.required])
         }),
         new FormGroup({
@@ -33,7 +35,18 @@ export class RegisterComponent implements OnInit {
   }
 
   RegisterUser(form) {
-    console.log(form.value.regformArray[0])
+    var user = new User();
+    user.email = form.value.regformArray[0].email;
+    user.password = form.value.regformArray[0].password;
+    user.FirstName = form.value.regformArray[0].firstName;
+    user.LastName = form.value.regformArray[0].lastName;
+    user.SpendLimit = form.value.regformArray[1].spendLimit;
+
+
+    this.userService.registerUser(user).subscribe(res => {
+      console.log(res)
+    });
+
   }
 
 }

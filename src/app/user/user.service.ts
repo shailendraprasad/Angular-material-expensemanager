@@ -1,34 +1,35 @@
 import { Injectable } from '@angular/core';
 import { User } from './UserModel';
 import { EventEmitter } from 'events';
-import { Observable, Subject, BehaviorSubject } from '../../../node_modules/rxjs';
-import { Router } from '../../../node_modules/@angular/router';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { baseExpenseApiUrl } from '../config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private router: Router) { }
+  constructor(private http: HttpClient) { }
 
-  private isAuthenticated = new BehaviorSubject<any>(window.sessionStorage.getItem('authenticated') || false);
+  public isAuthenticated = new BehaviorSubject<any>(window.sessionStorage.getItem('authenticated') || false);
 
 
   registerUser(user: User) {
-    this.isAuthenticated.next(true);
+    return this.http.post(baseExpenseApiUrl + 'user/create', user, { observe: 'response' }).pipe(map((result: Response) => {
+      return result.body;
+    }));
   }
 
   login(email: string, password: string) {
-
-    if (email === 'test@email.com' && password === 'password') {
-      this.isAuthenticated.next(true);
-      window.sessionStorage.setItem('authenticated', 'true');
-      this.router.navigate(['/']);
-      return true;
-    }
-    else
-      return false;
-
+    return this.http.post(baseExpenseApiUrl + 'user/login', { password: password, email: email }, { observe: 'response' })
+      .pipe(map((result: Response) => {
+        if (window.localStorage.getItem('authToken'))
+          window.localStorage.removeItem('authToken');
+        window.localStorage.setItem('authToken', result.headers.get('auth-Token'));
+        return result.body;
+      }));
   }
 
   logOut() {

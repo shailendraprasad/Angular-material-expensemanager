@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Expense } from './ExpenseModel';
-import { NgForm } from '../../../node_modules/@angular/forms';
+import { NgForm } from '@angular/forms';
 import { ExpenseService } from './expense.service';
-import { MatSnackBar } from '../../../node_modules/@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-add-expense',
@@ -41,11 +41,13 @@ export class AddExpenseComponent implements OnInit {
       expenseToAdd.category = form.value.category;
       expenseToAdd.date = form.value.date;
 
-      this.expenseService.AddExpense(expenseToAdd);
+      this.expenseService.AddExpense(expenseToAdd).subscribe(res => {
+        console.log(res)
+      });
 
       form.resetForm();
 
-      this.snackBar.open('Expense Added', 'Dismiss', { duration : 2000 });
+      this.snackBar.open('Expense Added', 'Dismiss', { duration: 2000 });
     }
   }
 

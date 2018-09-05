@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Expense } from './ExpenseModel';
-import { MatTableDataSource, MatPaginator } from '../../../node_modules/@angular/material';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { ExpenseService } from './expense.service';
 
 @Component({
