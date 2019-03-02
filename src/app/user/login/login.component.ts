@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/']);
         }
         else { 
-          this.snackBar.open('Invalid Credetials', 'Dismiss', { duration: 2000 });
+          this.snackBar.open('Invalid Credetials', 'Dismiss', { duration: 2000, panelClass: ['blue-snackbar'] });
           this.loginFailed = true;
         }
       })

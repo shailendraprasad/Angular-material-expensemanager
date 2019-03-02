@@ -44,7 +44,7 @@ export class AddExpenseComponent implements OnInit {
       this.expenseService.AddExpense(expenseToAdd).subscribe(res => {
         form.resetForm();
 
-        this.snackBar.open('Expense Added', 'Dismiss', { duration: 2000 });
+        this.snackBar.open('Expense Added', 'Dismiss', { duration: 2000, panelClass: ['blue-snackbar'] });
       });
 
 

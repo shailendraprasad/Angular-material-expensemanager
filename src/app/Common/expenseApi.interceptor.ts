@@ -33,7 +33,6 @@ export class ExpenseAPIInterceptor implements HttpInterceptor {
         if (event instanceof HttpResponse) {
         }
       }, error => {
-        console.log(error.status)
         if (error.status === 401) {
           this.router.navigate(['/user/login']);
         }

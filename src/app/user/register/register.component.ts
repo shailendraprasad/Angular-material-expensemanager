@@ -36,18 +36,20 @@ export class RegisterComponent implements OnInit {
   }
 
   RegisterUser(form) {
-    var user = new User();
-    user.email = form.value.regformArray[0].email;
-    user.password = form.value.regformArray[0].password;
-    user.FirstName = form.value.regformArray[0].firstName;
-    user.LastName = form.value.regformArray[0].lastName;
-    user.SpendLimit = form.value.regformArray[1].spendLimit;
+    if (form.valid) {
+      var user = new User();
+      user.email = form.value.regformArray[0].email;
+      user.password = form.value.regformArray[0].password;
+      user.FirstName = form.value.regformArray[0].firstName;
+      user.LastName = form.value.regformArray[0].lastName;
+      user.SpendLimit = form.value.regformArray[1].spendLimit;
 
 
-    this.userService.registerUser(user).subscribe(res => {
-      this.userService.isAuthenticated.next(true);
-      this.router.navigate(['/']);
-    });
+      this.userService.registerUser(user).subscribe(res => {
+        this.userService.isAuthenticated.next(true);
+        this.router.navigate(['/']);
+      });
+    }
 
   }
 

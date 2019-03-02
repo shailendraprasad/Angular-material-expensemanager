@@ -13,7 +13,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  public isAuthenticated = new BehaviorSubject<any>(window.sessionStorage.getItem('authenticated') || false);
+  public isAuthenticated = new BehaviorSubject<boolean>(Boolean(window.sessionStorage.getItem('authenticated')) || false);
 
 
   registerUser(user: User) {
@@ -28,6 +28,7 @@ export class UserService {
         if (window.localStorage.getItem('authToken'))
           window.localStorage.removeItem('authToken');
         window.localStorage.setItem('authToken', result.headers.get('auth-Token'));
+        window.sessionStorage.setItem('authenticated', 'true');
         return result.body;
       }));
   }
@@ -37,7 +38,7 @@ export class UserService {
     window.sessionStorage.removeItem('authenticated');
   }
 
-  IsUserAuthenticated(): Observable<any> {
+  IsUserAuthenticated(): Observable<boolean> {
     return this.isAuthenticated.asObservable();
   }
 }

@@ -3,7 +3,37 @@
     margin: auto;
 }
 
-form, input{
+form, input {
     width: 100%;
     margin: auto;
+}
+
+form {
+    position: relative;
+    z-index: 2;
+    margin: auto;
+    border: 0;
+    margin-top: -50px;
+}
+
+.background {
+    background: rgb(21, 33, 65);
+    color: #fff;
+    position: relative;
+    z-index: 0;
+    margin-top: -1px;
+    padding-top: 120px;
+}
+
+.background:after {
+    background: inherit;
+    bottom: -140px;
+    content: '';
+    height: 120%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    transform: skewY(4deg);
+    transform-origin: 100%;
+    z-index: -1;
 }

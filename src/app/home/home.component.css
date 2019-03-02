@@ -1,3 +1,27 @@
+.background {
+    background: rgb(21, 33, 65);
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    margin-top: -1px;
+    margin-bottom: 200px;
+    padding-top: 80px;
+}
+
+.background:after {
+    background: inherit;
+    bottom: -170px;
+    content: '';
+    display: block;
+    height: 175%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    transform: skewY(3deg);
+    transform-origin: 100%;
+    z-index: -1;
+}
+
 .container h1 {
     margin: auto;
     text-align: center;
@@ -5,12 +29,14 @@
 }
 
 /* Left column */
-.leftcolumn {   
+
+.leftcolumn {
     float: left;
     width: 55%;
 }
 
 /* Right column */
+
 .rightcolumn {
     float: right;
     width: 35%;
@@ -19,13 +45,14 @@
 }
 
 /* Clear floats after the columns */
+
 .row:after {
     content: "";
     clear: both;
 }
 
 @media screen and (max-width: 800px) {
-    .leftcolumn, .rightcolumn {   
+    .leftcolumn, .rightcolumn {
         width: 100%;
         padding: 0;
     }

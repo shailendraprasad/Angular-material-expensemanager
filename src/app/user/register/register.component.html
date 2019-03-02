@@ -1,54 +1,61 @@
-<form [formGroup]="registrationForm" autocomplete="off" novalidate (ngSubmit)="RegisterUser(registrationForm)">
-  <mat-horizontal-stepper [linear]="true" formArrayName="regformArray" #stepper class="container">
-    <mat-step [stepControl]="regformArray?.get([0])" formGroupName="0">
-      <ng-template matStepLabel>Basic Information</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="First name" formControlName="firstName" required>
-      </mat-form-field>
-      &nbsp;&nbsp;
-      <mat-form-field>
-        <input matInput placeholder="Last name" formControlName="lastName" required>
-      </mat-form-field>
-      <br>
-      <mat-form-field style="width:50%">
-        <input matInput placeholder="Email" required type="email" formControlName="email">
-        <mat-hint>We will not share your email with anyone.</mat-hint>
-      </mat-form-field>
-      <br>
-      <br>
-      <mat-form-field>
-        <input matInput placeholder="Password" type="password" formControlName="password" required>
-      </mat-form-field>
-      &nbsp;&nbsp;
-      <mat-form-field>
-        <input matInput placeholder="Confirm Password" formControlName="confirmpassword" type="password" required>
-      </mat-form-field>
-      <div>
-        <button mat-raised-button matStepperNext color="primary" type="button">Next</button>
-      </div>
-    </mat-step>
-    <mat-step [stepControl]="regformArray?.get([1])" formGroupName="1">
-      <ng-template matStepLabel>Expense related details</ng-template>
-      <br>
-      <span>Your daily expense limit: {{ slider.value }}</span>
-      <br>
-      <mat-slider [max]="500" [min]="0" style="width:80%" #slider formControlName="spendLimit" required>
-      </mat-slider>
-      <br>
-      <div>
-        <button mat-button matStepperPrevious type="button">Back</button>
-        <button mat-raised-button matStepperNext color="primary" type="button">Next</button>
-      </div>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <span>The information provided looks right! You are just a click away.</span>
-      <br>
-      <br>
-      <div>
-        <button mat-raised-button matStepperNext color="primary" type="submit">Register</button>
-        <button mat-button (click)="stepper.reset()" type="reset">Reset</button>
-      </div>
-    </mat-step>
-  </mat-horizontal-stepper>
-</form>
+<div class="background">
+</div>
+  <form [formGroup]="registrationForm" autocomplete="off" novalidate (ngSubmit)="RegisterUser(registrationForm)">
+    <br>
+    <mat-horizontal-stepper [linear]="true" formArrayName="regformArray" #stepper class="container">
+      <mat-step [stepControl]="regformArray?.get([0])" formGroupName="0">
+        <ng-template matStepLabel>Basic Information</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="First name" formControlName="firstName" required>
+        </mat-form-field>
+        &nbsp;&nbsp;
+        <mat-form-field>
+          <input matInput placeholder="Last name" formControlName="lastName" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field style="width:50%">
+          <input matInput placeholder="Email" required type="email" formControlName="email">
+          <mat-hint>We will not share your email with anyone.</mat-hint>
+          <mat-error *ngIf="regformArray?.get([0]).controls.email.hasError('email')">please enter a valid email address</mat-error>
+        </mat-form-field>
+        <br>
+        <br>
+        <mat-form-field style="width:50%">
+          <input matInput placeholder="Password" type="password" formControlName="password" required>
+          <mat-error *ngIf="regformArray?.get([0]).controls.password.hasError('minlength')">
+            password should have a minimum of 8 characters</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field style="width:50%">
+          <input matInput placeholder="Confirm Password" formControlName="confirmpassword" type="password" required>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button matStepperNext color="primary" type="button">Next</button>
+        </div>
+      </mat-step>
+      <mat-step [stepControl]="regformArray?.get([1])" formGroupName="1">
+        <ng-template matStepLabel>Expense related details</ng-template>
+        <br>
+        <span>Your daily expense limit: {{ slider.value }}</span>
+        <br>
+        <mat-slider [max]="500" [min]="0" style="width:80%" #slider formControlName="spendLimit" required>
+        </mat-slider>
+        <br>
+        <br>
+        <div>
+          <button mat-button matStepperPrevious type="button">Back</button>
+          <button mat-raised-button matStepperNext color="primary" type="button">Next</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <span>The information provided looks right! You are just a click away.</span>
+        <br>
+        <br>
+        <div>
+          <button mat-raised-button matStepperNext color="primary" type="submit">Register</button>
+          <button mat-button (click)="stepper.reset()" type="reset">Reset</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </form>

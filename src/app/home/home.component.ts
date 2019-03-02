@@ -9,7 +9,8 @@ import { UserService } from '../user/user.service';
 export class HomeComponent implements OnInit {
 
   isAuthenticated: boolean = false;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit() {
     this.userService.IsUserAuthenticated().subscribe(data => {

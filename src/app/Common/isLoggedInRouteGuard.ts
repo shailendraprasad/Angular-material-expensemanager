@@ -23,4 +23,5 @@ export class isLoggedInRouteGuard implements CanActivate {
             return data
         }));
     }
+
 }

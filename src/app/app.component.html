@@ -1,6 +1,27 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<app-nav></app-nav>
-<div class="container">
-  <br><br>
-  <router-outlet></router-outlet>
+
+
+<div [ngClass]="themeClassName" fxLayout="column">
+
+  <mat-sidenav-container>
+    <app-nav (changeThemeEvent)="themeChanged($event)" (sideNavToggleEvent)="sideNavToggle($event)"></app-nav>
+    <mat-sidenav #sidenav mode="side" style="width: 150px;background: rgba(157, 150, 221, 0.1);">
+
+      <mat-list>
+        <mat-list-item [routerLink]="['/addexpense']"> Add Expense </mat-list-item>
+        <mat-list-item [routerLink]="['/viewexpense']"> View Expense </mat-list-item>
+        <mat-list-item [routerLink]="['/']"> Manage profile </mat-list-item>
+      </mat-list>
+      <div style="bottom: 0; position: absolute; min-height: 40px; background: rgb(21, 33, 65);width: 220px;
+      color: white; text-align: center; ">
+        <span style="top: 10px; position: relative">
+          <small>Terms and privacy</small>
+        </span>
+      </div>
+    </mat-sidenav>
+
+    <div class="container" fxLayout="column">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-container>
 </div>
